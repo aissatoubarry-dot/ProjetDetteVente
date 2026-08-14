@@ -1,0 +1,52 @@
+@startuml Vente
+left to right direction
+actor "admin Boutique" as A
+
+rectangle "vente/POS"{
+
+    usecase "Se connecter" as SC
+
+    usecase "lister commandes" as LC
+    usecase "voir lignes" as VL
+
+    usecase "lister statistiques" as LS 
+    usecase "voir encaissements" as VE 
+    usecase "voir en cours clients total" as VECT 
+    usecase "voir commandes enregistres" as VCE 
+
+    usecase "enregistrer vente" as EV
+    usecase "selectionner client" as SCL
+    usecase "ajouter article" as AA
+        usecase "selectionner article" as SA
+        usecase "saisir quantite" as SQ
+    usecase "selectionner mode reglement" as SMR
+    usecase "saisir montant versement" as SMV
+
+}
+
+A-> LS
+A-> EV
+A-> LC
+
+LC <.. VL:<<extend>>
+
+LS ..> VE   : <<include>>
+LS ..> VECT : <<include>>
+LS ..> VCE  : <<include>>
+
+EV ..> SCL :<<include>>
+EV ..> AA :<<include>>
+EV ..> SMR :<<include>>
+EV ..> SMV :<<include>>
+
+AA ..> SA :<<include>>
+AA ..> SQ :<<include>>
+
+
+
+LC ..> SC:<<include>>
+LS ..> SC:<<include>>
+EV ..> SC:<<include>>
+
+
+@enduml
