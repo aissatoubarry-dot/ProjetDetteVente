@@ -1,0 +1,50 @@
+@startuml usecase
+left to right direction
+actor "charge vente" as CV
+
+rectangle "dette"{
+
+    usecase "Se connecter" as SC
+
+
+    usecase "lister statistiques" as LS 
+    usecase "voir creances actives" as VCA
+    usecase "voir clients debiteurs" as VCD
+    usecase "voir total recouvrements" as VTR
+
+
+
+
+    usecase "lister dettes actives" as LDA
+    usecase "lister article" as LA
+    usecase "rechercher client" as RC
+    usecase "lister paiement" as LP
+    usecase "enregistrer remboursement" as ER
+        usecase "Sélectionner canal paiement" as SCP
+        usecase "saisir montant versement" as SMV
+
+}
+
+CV-> LS
+CV-> LDA
+
+LDA <..LP:<<extend>>
+LDA <..ER:<<extend>>
+LDA <..RC:<<extend>>
+LDA <..LA:<<extend>>
+
+ER ..>SCP :<<include>>
+ER ..>SMV :<<include>>
+
+
+LS ..> VCA : <<include>>
+ LS ..> VCD : <<include>>
+ LS ..> VTR : <<include>>
+
+LDA ..> SC:<<include>>
+LS ..> SC:<<include>>
+
+
+
+
+@enduml

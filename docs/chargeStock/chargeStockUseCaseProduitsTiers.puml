@@ -1,0 +1,59 @@
+@startuml usecase
+left to right direction
+actor "charge stock" as CS
+
+
+rectangle "produits tiers"{
+
+    usecase "Se connecter" as SC
+
+    usecase "lister statistiques " as LS 
+        usecase "Voir valeur total stock " as VVTS 
+        usecase "Voir total articles au catalogue " as VTAC 
+        usecase "Voir total clients enregistrés " as VTCE 
+    
+    usecase "Gestion produits" as GP
+        usecase "enregistrer un produit" as EP
+        usecase "lister catalogue courant" as LCC
+
+    usecase "Gestion clients" as GC
+        usecase "enregistrer un client" as EC
+        usecase "lister repertoire client" as LRC    
+
+    
+    usecase "Gestion fournisseurs" as GF
+        usecase "enregistrer un fournisseur" as EF
+        usecase "lister repertoire fournisseur" as LRF        
+
+}
+
+
+
+CS -> LS 
+CS -> GP 
+CS -> GC
+CS -> GF
+
+LS ..> VVTS : <<include>>
+ LS ..> VTAC : <<include>>
+  LS ..> VTCE : <<include>>
+
+
+GP <.. EP: <<extend>>
+GP <.. LCC: <<extend>>
+
+
+GC <.. EC: <<extend>>
+GC <.. LRC: <<extend>>
+
+GF <.. EF: <<extend>>
+GF <.. LRF: <<extend>>
+
+
+LS ..> SC:<<include>>
+GP ..> SC:<<include>>
+GC ..> SC:<<include>>
+GF ..> SC:<<include>>
+
+
+@enduml

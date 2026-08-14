@@ -1,0 +1,57 @@
+@startuml usecase
+left to right direction
+actor "admin Boutique" as A
+
+rectangle "dashboard" {
+
+    usecase "Se connecter" as SC
+
+    usecase "lister statistiques" as LS
+    ' usecase "voir vente comptant" as VVC
+    ' usecase "voir dettes à recuperer" as VDR
+    ' usecase "voir volume approvisionné" as VVA
+    ' usecase "voir valeur stock" as VVS
+    ' usecase "voir taux recouvrement" as VTR
+    ' usecase "voir panier moyen" as VPM
+
+    usecase "voir infos 1" as VI1
+    usecase "lister ventes recentes" as LVR
+    usecase "lister dettes du jour" as LDJ
+    usecase "lister ruptures et alertes" as LRA
+
+    usecase "voir infos 2" as VI2
+    usecase "lister livraisons du jour" as LLJ
+    usecase "lister clients debiteurs" as LCD
+    usecase "lister solde fournisseurs" as LSF
+
+}
+
+
+A-> LS
+A-> VI1
+A-> VI2
+
+
+VI1 ..> LVR : <<include>>
+ VI1 ..> LDJ : <<include>>
+ VI1 ..> LRA : <<include>>
+ 
+ VI2 ..> LLJ : <<include>>
+ VI2 ..> LCD : <<include>>>
+ VI2 ..> LSF : <<include>>
+
+' LS <.. VVC:<<extend>>
+' LS <.. VDR:<<extend>>
+' LS <.. VVA:<<extend>>
+' LS <.. VVS:<<extend>>
+' LS <.. VTR:<<extend>>
+' LS <.. VPM:<<extend>>
+
+
+
+LS ..> SC:<<include>>
+VI1 ..> SC:<<include>>
+VI2 ..> SC:<<include>>
+
+
+@enduml
