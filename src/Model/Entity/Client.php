@@ -8,8 +8,9 @@ class Client
     private $telephone;
     private $limiteCredit;
 
-    public function __construct($nom, $prenom, $telephone, $limiteCredit = 0)
+    public function __construct($nom, $prenom, $telephone, $limiteCredit = 0, $id = null)
     {
+        $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->telephone = $telephone;

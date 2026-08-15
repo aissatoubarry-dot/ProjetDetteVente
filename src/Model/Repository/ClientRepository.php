@@ -15,12 +15,25 @@ class ClientRepository{
 
         $sql = "SELECT * FROM client";
 
-        $prepare = $this->connexion -> prepare($sql);
+        $prepare = $this->connexion->prepare($sql);
         $prepare->execute();
 
-        $clients = $prepare -> fetchAll(PDO::FETCH_CLASS, "Client");
+        $clients = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
-        return $clients;
+        $resultat = [];
+
+        foreach ($clients as $client) {
+
+            $resultat[] = new Client(
+                $client['nom'],
+                $client['prenom'],
+                $client['telephone'],
+                $client['limite_credit'],
+                $client['id']
+            );
+        }
+
+        return $resultat;
     }
     public function getClientById(int $id){
 
@@ -39,7 +52,8 @@ class ClientRepository{
             $client['nom'],
             $client['prenom'],
             $client['telephone'],
-            $client['limite_credit']
+            $client['limite_credit'],
+            $client['id']
         );
     }
 }

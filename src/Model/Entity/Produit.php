@@ -8,8 +8,9 @@ class Produit
     private $prixVente;
     private $quantiteStock;
 
-    public function __construct($nom, $prixAchat, $prixVente, $quantiteStock = 0)
+    public function __construct($nom, $prixAchat, $prixVente, $quantiteStock = 0, $id = null)
     {
+        $this->id = $id;
         $this->nom = $nom;
         $this->prixAchat = $prixAchat;
         $this->prixVente = $prixVente;

@@ -8,31 +8,44 @@ class ProduitRepository{
     private $connexion;
 
     public function __construct(){
-        $this->connexion = Database :: getInstance() -> getConnexion();
+        $this->connexion = Database::getInstance()->getConnexion();
     }
 
     public function getAllProduits(){
 
         $sql = "SELECT * FROM produit";
 
-        $prepare = $this->connexion -> prepare($sql);
+        $prepare = $this->connexion->prepare($sql);
         $prepare->execute();
 
-        $produits = $prepare -> fetchAll(PDO::FETCH_CLASS , "Produit");
+        $produits = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
-        return $produits;
+        $resultat = [];
 
+        foreach ($produits as $produit) {
+
+            $resultat[] = new Produit(
+                $produit['nom'],
+                $produit['prix_achat'],
+                $produit['prix_vente'],
+                $produit['quantite_stock'],
+                $produit['id']
+            );
+        }
+
+        return $resultat;
     }
-
 
     public function getProduitById(int $id){
 
         $sql = "SELECT * FROM produit WHERE id = :id";
 
-        $prepare = $this->connexion -> prepare($sql);
-        $prepare->execute(['id' => $id]);
+        $prepare = $this->connexion->prepare($sql);
+        $prepare->execute([
+            'id' => $id
+        ]);
 
-        $produit = $prepare -> fetch(PDO::FETCH_ASSOC);
+        $produit = $prepare->fetch(PDO::FETCH_ASSOC);
 
         if (!$produit) {
             return null;
@@ -42,8 +55,8 @@ class ProduitRepository{
             $produit['nom'],
             $produit['prix_achat'],
             $produit['prix_vente'],
-            $produit['quantite_stock']
+            $produit['quantite_stock'],
+            $produit['id']
         );
     }
-
 }

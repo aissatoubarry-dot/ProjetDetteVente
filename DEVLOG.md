@@ -148,3 +148,41 @@ Mise en place du contrôle de la limite de crédit avant la création d'une vent
 Le Service contient les principales règles métier de la vente.
 La transaction permet d'éviter une vente enregistrée seulement en partie.
 Le contrôle du stock et de la limite de crédit est effectué avant de valider la vente.
+
+
+
+
+
+Phase 2 : Interface POS
+
+Heure de réalisation : 17h00 - 20h00
+
+Ce qui a été fait :
+- Création du POSController pour gérer l'interface de caisse.
+- Connexion de la vue POS au POSController.
+- Récupération dynamique des clients et des produits depuis la base de données.
+- Mise en place du formulaire de création d'une vente avec la méthode POST.
+- Récupération du client sélectionné, des produits, des quantités et du mode de règlement.
+- Connexion du POSController au VenteService pour enregistrer les ventes.
+- Dynamisation de la liste des clients et des produits dans la vue.
+- Mise en place de l'affichage dynamique du panier.
+
+Choix effectués :
+- Utilisation du POSController pour faire le lien entre la vue et le VenteService.
+- Utilisation des données provenant directement de la base de données pour rendre la vue dynamique.
+- Utilisation de la méthode POST pour transmettre les informations de la vente au contrôleur.
+- Utilisation des identifiants des clients et des produits pour permettre au VenteService de retrouver les éléments concernés.
+
+Difficultés / Obstacles :
+- Comprendre le passage des données entre la vue, le contrôleur et le service.
+- Comprendre pourquoi les données provenant de $_POST sont de type string.
+- Gestion de la récupération des identifiants lors de la création des objets Client et Produit.
+- Adaptation de la récupération des données après l'abandon de FETCH_CLASS.
+- Comprendre le fonctionnement des données du panier envoyées avec product_ids[] et product_qtys[].
+
+Éléments importants à retenir :
+- Le Controller fait le lien entre la vue et le Service.
+- La vue affiche les données récupérées par le Controller.
+- Les données du formulaire sont transmises au Controller avec POST.
+- Le Service reste responsable de la logique métier de la vente.
+- Les Repository restent responsables de la récupération des données depuis la base de données.
