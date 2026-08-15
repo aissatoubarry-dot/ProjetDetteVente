@@ -92,3 +92,27 @@ Difficultés / Obstacles :
 - J'ai compris qu'ici il ya autant d'entite que de tables dans la base de données.
 - J'ai compris que les entités ne doivent pas gérer directement la base de données.
 - La communication avec la base de données sera réalisée avec les Repository.
+
+
+
+
+Phase 2 : Repositories
+
+Heure : 11h00 - 13h00
+
+Ce qui a été fait :
+- Création de ProduitRepository, ClientRepository et FournisseurRepository.
+- Mise en place de la connexion avec Database.
+- Utilisation de PDO pour exécuter les requêtes.
+- Utilisation des requêtes préparées avec prepare() et execute().
+- Utilisation de FETCH_CLASS pour récupérer les résultats sous forme d'objets.
+- Ajout des méthodes pour lister les éléments et rechercher un élément par son id.
+
+Choix effectués :
+- Utilisation de FETCH_CLASS pour travailler directement avec les entités POO.
+- Utilisation des paramètres nommés comme :id pour sécuriser les requêtes.
+
+Difficultés / Obstacles :
+- Comprendre le rôle des Repository.
+- Comprendre l'utilisation de FETCH_CLASS pour transformer les résultats SQL en objets.
+- Comprendre le fonctionnement de prepare() et execute().
