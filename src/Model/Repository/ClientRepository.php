@@ -22,7 +22,6 @@ class ClientRepository{
 
         return $clients;
     }
-
     public function getClientById(int $id){
 
         $sql = "SELECT * FROM client WHERE id = :id";
@@ -30,8 +29,17 @@ class ClientRepository{
         $prepare = $this->connexion -> prepare($sql);
         $prepare->execute(['id' => $id]);
 
-        $client = $prepare -> fetch(PDO::FETCH_CLASS, "Client");
+        $client = $prepare -> fetch(PDO::FETCH_ASSOC);
 
-        return $client;
+        if (!$client) {
+            return null;
+        }
+
+        return new Client(
+            $client['nom'],
+            $client['prenom'],
+            $client['telephone'],
+            $client['limite_credit']
+        );
     }
 }

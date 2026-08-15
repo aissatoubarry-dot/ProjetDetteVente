@@ -24,15 +24,26 @@ class ProduitRepository{
 
     }
 
+
     public function getProduitById(int $id){
 
-        $sql="SELECT * FROM produit WHERE id = :id";
+        $sql = "SELECT * FROM produit WHERE id = :id";
 
         $prepare = $this->connexion -> prepare($sql);
         $prepare->execute(['id' => $id]);
 
-        $produit = $prepare -> fetch(PDO::FETCH_CLASS, "Produit");
+        $produit = $prepare -> fetch(PDO::FETCH_ASSOC);
 
-        return $produit;
+        if (!$produit) {
+            return null;
+        }
+
+        return new Produit(
+            $produit['nom'],
+            $produit['prix_achat'],
+            $produit['prix_vente'],
+            $produit['quantite_stock']
+        );
     }
+
 }

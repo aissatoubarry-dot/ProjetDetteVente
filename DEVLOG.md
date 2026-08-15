@@ -116,3 +116,35 @@ Difficultés / Obstacles :
 - Comprendre le rôle des Repository.
 - Comprendre l'utilisation de FETCH_CLASS pour transformer les résultats SQL en objets.
 - Comprendre le fonctionnement de prepare() et execute().
+
+
+
+Phase 2 : VenteService
+
+Heure de réalisation : 14h00 - 17h00
+
+Ce qui a été fait :
+Création de la classe VenteService pour gérer la logique d'une vente.
+Mise en place de la gestion des lignes de commande et de la vérification du stock avant la vente.
+Calcul du montant total à partir des produits et des quantités.
+Ajout du contrôle de la limite de crédit pour les ventes à crédit.
+Utilisation d'une transaction PDO avec beginTransaction(), commit() et rollBack().
+Enregistrement de la commande et de ses lignes, puis diminution du stock.
+Création automatique d'une dette lorsqu'une vente est effectuée à crédit.
+Utilisation des requêtes préparées avec prepare() et execute().
+Utilisation de RETURNING id et fetchColumn() pour récupérer l'identifiant de la commande.
+
+Choix effectués :
+La logique de la vente est regroupée dans VenteService .
+La transaction permet de valider toutes les opérations ensemble ou de les annuler en cas d'erreur.
+
+Difficultés / Obstacles :
+Compréhension du fonctionnement des transactions et du rollback.
+Compréhension de fetchColumn() pour récupérer une valeur retournée par une requête.
+Mise en place du contrôle de la limite de crédit avant la création d'une vente à crédit.
+
+
+Éléments importants à retenir :
+Le Service contient les principales règles métier de la vente.
+La transaction permet d'éviter une vente enregistrée seulement en partie.
+Le contrôle du stock et de la limite de crédit est effectué avant de valider la vente.
