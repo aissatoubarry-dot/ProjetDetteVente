@@ -186,3 +186,53 @@ Difficultés / Obstacles :
 - Les données du formulaire sont transmises au Controller avec POST.
 - Le Service reste responsable de la logique métier de la vente.
 - Les Repository restent responsables de la récupération des données depuis la base de données.
+
+
+
+Phase 3 : Gestion des Dettes & Remboursements
+
+Heure : 09h00 - 11h30
+
+Ce qui a été fait :
+- Création de DetteRepository pour récupérer les dettes associées aux commandes et aux clients.
+- Mise en place de la récupération des informations du client liées à chaque dette.
+- Création de DebtService pour gérer la logique des remboursements.
+- Mise en place du remboursement partiel d'une dette.
+- Vérification que le montant du remboursement est supérieur à 0.
+- Vérification que le montant du remboursement ne dépasse pas le montant restant.
+- Enregistrement du remboursement dans la table paiement.
+- Mise à jour du montant restant de la dette après chaque remboursement.
+- Mise à jour automatique du statut de la dette.
+- Passage du statut à SOLDEE lorsque le montant restant atteint 0.
+- Conservation du statut EN_COURS lorsqu'il reste encore un montant à payer.
+- Utilisation d'une transaction PDO avec beginTransaction(), commit() et rollBack().
+- Création de DetteController pour gérer l'affichage des dettes et les remboursements.
+- Mise en place de l'affichage dynamique des dettes dans l'interface.
+- Ajout de l'affichage du montant initial, du montant payé, du reste dû et du statut.
+- Ajout du formulaire permettant d'effectuer un remboursement depuis l'interface.
+- Ajout d'un message de confirmation après un remboursement réussi.
+
+Choix effectués :
+- La logique du remboursement est placée dans DebtService.
+- DetteRepository est utilisé pour récupérer les données des dettes.
+- DetteController assure la communication entre la vue et le service.
+- Les remboursements sont enregistrés dans la table paiement afin de conserver l'historique des paiements.
+- Une transaction est utilisée afin d'assurer la cohérence entre l'enregistrement du paiement et la mise à jour de la dette.
+
+Difficultés / Obstacles :
+- Comprendre le lien entre une dette, une commande et un client.
+- Faire communiquer correctement DetteController avec DebtService.
+- Faire apparaître les dettes dans la vue principale qui contient plusieurs parties de l'application.
+- Identifier les données disponibles dans le tableau retourné par le Repository.
+- Corriger l'utilisation de la clé restedu qui ne correspondait pas au nom réel montant_restant.
+- Mettre en place le routage permettant de distinguer une création de vente d'un remboursement.
+
+
+
+Éléments importants à retenir :
+- DebtService contient les principales règles métier liées au remboursement.
+- Un remboursement partiel diminue le montant_restant de la dette.
+- Une dette passe à SOLDEE uniquement lorsque son montant_restant atteint 0.
+- La table paiement permet de conserver l'historique des remboursements.
+- La transaction permet de garantir que l'enregistrement du paiement et la mise à jour de la dette sont réalisés ensemble.
+- Le Repository récupère les données, le Service applique les règles métier et le Controller fait le lien avec la vue.

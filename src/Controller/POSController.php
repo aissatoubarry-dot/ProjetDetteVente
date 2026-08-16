@@ -3,18 +3,21 @@
 require_once dirname(__DIR__)."/Core/Database.php";
 require_once dirname(__DIR__)."/Model/Repository/ProduitRepository.php";
 require_once dirname(__DIR__)."/Model/Repository/ClientRepository.php";
+require_once dirname(__DIR__)."/Model/Repository/DetteRepository.php";
 require_once dirname(__DIR__)."/Service/VenteService.php";
 
 class POSController
 {
     private $ProduitRepository;
     private $ClientRepository;
+    private $DetteRepository;
     private $VenteService;
 
     public function __construct()
     {
         $this->ProduitRepository = new ProduitRepository();
         $this->ClientRepository = new ClientRepository();
+        $this->DetteRepository = new DetteRepository();
         $this->VenteService = new VenteService();
     }
 
@@ -22,6 +25,7 @@ class POSController
     {
         $clients = $this->ClientRepository->getAllClients();
         $produits = $this->ProduitRepository->getAllProduits();
+        $dettes = $this->DetteRepository->getAllDettes();
 
         require_once dirname(__DIR__)."/View/pos/index.php";
     }
@@ -29,8 +33,6 @@ class POSController
     public function saveVente()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            
 
             $client_id = (int) $_POST['client_id'];
 
@@ -66,6 +68,7 @@ class POSController
 
             $clients = $this->ClientRepository->getAllClients();
             $produits = $this->ProduitRepository->getAllProduits();
+            $dettes = $this->DetteRepository->getAllDettes();
 
             require_once dirname(__DIR__)."/View/pos/index.php";
         }
